@@ -8,6 +8,11 @@
 ;; Use path from shell.
 (exec-path-from-shell-initialize)
 
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(setq magit-push-always-verify nil)
+
 ;; Disable electric indent mode because it seems a bit whacked out with JSX
 ;; files. Probably others too!
 (electric-indent-mode -1)
