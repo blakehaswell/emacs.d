@@ -14,9 +14,6 @@
 (add-to-list 'load-path "~/.emacs.d/functions/")
 
 (setq column-number-mode t
-      custom-enabled-themes '(spacegray)
-      custom-safe-themes
-      '("4ff23437b3166eeb7ca9fa026b2b030bba7c0dfdc1ff94df14dfb1bcaee56c78" default)
       global-hl-line-mode t
       global-linum-mode t
       ido-mode t
@@ -33,9 +30,6 @@
 (setq make-backup-files nil)
 
 ;; (setq exec-path (append exec-path '("/usr/local/bin")))
-
-;; Use path from shell.
-(exec-path-from-shell-initialize)
 
 ;; Fill column.
 (setq-default fill-column 80)
@@ -57,6 +51,15 @@
 (setq c-default-style "linux")
 (defvaralias 'c-basic-offset 'tab-width)
 
+(use-package spacegray-theme
+             :ensure t
+             :config (load-theme 'spacegray t))
+
+(use-package exec-path-from-shell
+             :ensure t
+             :config (when (memq window-system '(mac ns))
+                       (exec-path-from-shell-initialize)))
+
 (use-package magit
              :ensure t
              :bind (("C-x g" . magit-status)
@@ -73,13 +76,31 @@
              :ensure t
              :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package clojure-mode
+             :ensure t)
+
+(use-package cider
+             :ensure t)
+
 (use-package web-mode
              :ensure t
              :mode ("\\.jsx$" . web-mode))
 
+(use-package emmet-mode
+             :ensure t)
+
+(use-package scss-mode
+             :ensure t)
+
 (use-package js2-mode
              :ensure t
              :mode ("\\.js$" . js2-mode))
+
+(use-package json-mode
+             :ensure t)
+
+(use-package json-reformat
+             :ensure t)
 
 (use-package markdown-mode
              :ensure t
