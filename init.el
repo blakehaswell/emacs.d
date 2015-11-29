@@ -10,6 +10,8 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(require 'use-package)
+
 ;; Custom functions
 (add-to-list 'load-path "~/.emacs.d/functions/")
 
