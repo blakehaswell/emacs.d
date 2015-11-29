@@ -15,18 +15,20 @@
 ;; Custom functions
 (add-to-list 'load-path "~/.emacs.d/functions/")
 
-(setq column-number-mode t
-      global-hl-line-mode t
-      global-linum-mode t
-      ido-mode t
-      indent-tabs-mode nil
+(setq indent-tabs-mode nil
       line-spacing 0.4
-      menu-bar-mode nil
-      scroll-bar-mode nil
-      tab-width 4
-      tool-bar-mode nil)
+      tab-width 4)
 
 (set-face-attribute 'default nil :height 140)
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+
+(column-number-mode t)
+(global-hl-line-mode t)
+(global-linum-mode t)
+(ido-mode t)
 
 ;; No backup files.
 (setq make-backup-files nil)
@@ -74,7 +76,7 @@
              (smartparens-global-mode t)
              (sp-local-pair 'web-mode "<" ">"))
 
-(use-package rainbow-delimeters
+(use-package rainbow-delimiters
              :ensure t
              :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
@@ -106,6 +108,7 @@
 
 (use-package markdown-mode
              :ensure t
+             :config
              (use-package polymode
                           :ensure t
                           :config (add-hook 'poly-markdown-mode-hook 'turn-on-visual-line-mode)
