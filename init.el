@@ -15,9 +15,9 @@
 ;; Custom functions
 (add-to-list 'load-path "~/.emacs.d/functions/")
 
-(setq indent-tabs-mode nil
-      line-spacing 0.4
-      tab-width 4)
+(setq-default indent-tabs-mode nil
+              line-spacing 0.4
+              tab-width 4)
 
 (set-face-attribute 'default nil :height 140)
 
