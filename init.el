@@ -104,7 +104,8 @@
 
 (use-package web-mode
              :ensure t
-             :mode ("\\.jsx$" . web-mode))
+             :mode ("\\.jsx$" . web-mode)
+             :config (flycheck-add-mode 'javascript-eslint 'web-mode))
 
 (use-package emmet-mode
              :ensure t)
