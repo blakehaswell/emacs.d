@@ -110,6 +110,9 @@
 (use-package emmet-mode
              :ensure t)
 
+(use-package handlebars-mode
+             :ensure t)
+
 (use-package scss-mode
              :ensure t)
 
