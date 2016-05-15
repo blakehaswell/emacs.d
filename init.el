@@ -51,6 +51,9 @@
 ;; Tabs
 (global-set-key (kbd "TAB") 'tab-to-tab-stop)
 
+;; Delete trailing whitespace before save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
 ;; C mode
 (setq c-default-style "linux")
 (defvaralias 'c-basic-offset 'tab-width)
