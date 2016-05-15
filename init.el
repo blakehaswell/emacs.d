@@ -83,6 +83,19 @@
              :ensure t
              :config (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
+(use-package projectile
+             :ensure t)
+
+(use-package flycheck
+             :ensure t
+             :config (add-hook 'after-init-hook #'global-flycheck-mode)
+                     (setq-default flycheck-disabled-checkers
+                                   (append flycheck-disabled-checkers
+                                           '(javascript-gjslint
+                                             javascript-jshint
+                                             javascript-standard
+                                             json-jsonlist))))
+
 (use-package clojure-mode
              :ensure t)
 
@@ -101,7 +114,14 @@
 
 (use-package js2-mode
              :ensure t
-             :mode ("\\.js$" . js2-mode))
+             :mode ("\\.js$" . js2-mode)
+             :config
+             (js2-mode-toggle-warnings-and-errors)
+             (add-hook 'js2-mode-hook
+                       (lambda ()
+                         (let ((local-eslint (expand-file-name "node_modules/.bin/eslint" (projectile-project-root))))
+                           (when (file-exists-p local-eslint)
+                             (setq flycheck-javascript-eslint-executable local-eslint))))))
 
 (use-package json-mode
              :ensure t)
@@ -123,12 +143,3 @@
              :bind (("C->" . mc/mark-next-like-this)
                     ("C-<" . mc/mark-previous-like-this)
                     ("C-c C-<" . mc/mark-all-like-this)))
-
-(use-package flycheck
-             :ensure t
-             :config
-             (add-hook 'after-init-hook #'global-flycheck-mode)
-             (setq-default flycheck-disabled-checkers
-                           (append flycheck-disabled-checkers
-                                   '(javascript-jshint json-jsonlist)))
-             (flycheck-add-mode 'javascript-eslint 'web-mode))
