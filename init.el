@@ -54,6 +54,13 @@
 ;; Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
+;; Preserve case when expanding words (M-/)
+(setq dabbrev-case-replace nil)
+
+;; TODO Email
+;; TODO Eww settings (search w/ DDG, defaut for browse url, etc.)
+;; TODO Java settings (gtags?)
+
 ;; C mode
 (setq c-default-style "linux")
 (defvaralias 'c-basic-offset 'tab-width)
