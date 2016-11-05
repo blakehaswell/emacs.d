@@ -60,6 +60,11 @@
 ;; TODO Email
 ;; TODO Eww settings (search w/ DDG, defaut for browse url, etc.)
 ;; TODO Java settings (gtags?)
+(add-hook 'java-mode-hook
+  '(lambda ()
+     (semantic-add-system-include (getenv "JAVA_HOME") 'java-mode)))
+(semantic-mode 1)
+;; company mode vs helm? M-. for ctags?
 
 ;; C mode
 (setq c-default-style "linux")
@@ -102,6 +107,33 @@
                                              javascript-jshint
                                              javascript-standard
                                              json-jsonlist))))
+
+(use-package company
+             :ensure t)
+
+(use-package ggtags
+             :ensure t)
+
+(use-package helm
+             :ensure t
+             :bind (("M-x" . helm-M-x)
+                    ("C-x b" . helm-mini)
+                    ("C-x C-f" . helm-find-files)
+                    ("M-/" . helm-dabbrev)
+                    ("M-y" . helm-show-kill-ring)
+                    ("C-c h f" . helm-semantic-or-imenu))
+             :config ;;(global-set-key (kbd "C-c h") 'helm-command-prefix)
+                     ;;(global-unset-key (kbd "C-x c"))
+                     (setq helm-split-window-in-side-p           t  ; open helm buffer inside current window, not occupy whole other window
+                           helm-move-to-line-cycle-in-source     t  ; move to end or beginning of source when reaching top or bottom of source.
+                           helm-scroll-amount                    8) ; scroll 8 lines other window using M-<next>/M-<prior>
+                     (helm-mode 1))
+
+(use-package helm-gtags
+             :ensure t)
+
+(use-package helm-company
+             :ensure t)
 
 (use-package clojure-mode
              :ensure t)
@@ -154,3 +186,6 @@
              :bind (("C->" . mc/mark-next-like-this)
                     ("C-<" . mc/mark-previous-like-this)
                     ("C-c C-<" . mc/mark-all-like-this)))
+
+(use-package haskell-mode
+             :ensure t)
